@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxproperties>
+	<catalog name="base" text="基本信息">
+		<property name="itf.type" text="类别" value="DOORCARD"
+			editable="false" type="String">
+			<remark>这是接口类别</remark>
+		</property>
+		<property name="itf.id" text="编码" value="DoorCard_GENClient"
+			editable="false" type="String">
+			<remark>这是接口编码</remark>
+		</property>
+		<property name="itf.version" text="版本" value="1.0" editable="false"
+			type="String">
+			<remark>这是接口版本</remark>
+		</property>
+		<property name="itf.class" text="实现类"
+			value="com.foxhis.itf.doorcard.DoorCard_GENClient" editable="false"
+			type="String">
+			<remark>这是接口实现类</remark>
+		</property>
+		<property name="itf.name.cn" text="中文名称" value="门锁通用客户端"
+			editable="false" type="String">
+			<remark>这是接口中文名称</remark>
+		</property>
+		<property name="itf.name.en" text="英文名称" value="DoorCard_GENClient"
+			editable="false" type="String">
+			<remark>这是接口英文名称</remark>
+		</property>
+		<property name="itf.name.tw" text="繁体名称" value="DoorCard_GENClient"
+			editable="false" type="String">
+			<remark>这是接口繁体名称</remark>
+		</property>
+	</catalog>
+	<catalog name="parm" text="接口参数">
+		
+		<property name="doorcard.btlock.serverip" text="服务端地址"
+			value="127.0.0.1" editable="true" type="String">
+			<remark></remark>
+		</property>
+		<property name="doorcard.btlock.serverport" text="服务端端口"
+			value="6666" editable="true" type="Integer">
+			<remark></remark>
+		</property>
+		<property name="doorcard.btlock.conntimeout" text="设置连接超时[单位秒]"
+			value="10" editable="true" type="Integer">
+			<remark></remark>
+		</property>
+		<property name="doorcard.btlock.idletimeout" text="设置idle超时[单位秒]"
+			value="10" editable="true" type="Integer">
+			<remark></remark>
+		</property>
+		<property name="doorcard.btlock.isdoorcardlink" text="是否需要管理序列号"
+			value="false" editable="true" type="Boolean">
+			<remark></remark>
+		</property>
+		
+	</catalog>
+
+</foxproperties>
+

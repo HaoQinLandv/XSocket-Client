@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ant deploy  zhouhj@foxhis.com -->
+<project name="DoorCard_GENClient" basedir="." default="deploy">
+	<tstamp prefix="fox">
+		<format property="buildnow" pattern="yyyyMMddHHmm" />
+	</tstamp>
+
+	<property name="prj.name" value="${ant.project.name}" />
+	<property name="prj.cmt.name" value="${prj.name}-commit-${fox.buildnow}" />
+	<property name="prj.dir" value="${basedir}" />
+
+	<property name="prj.src.dir" value="${prj.dir}/src" />
+	<property name="prj.lib.dir" value="${prj.dir}/lib" />
+	<property name="prj.bin.dir" value="${prj.dir}/classes" />
+	<property name="prj.dest.dir" value="${prj.dir}/dest" />
+	<property name="prj.cmt.dir" value="${prj.dir}/dest/${prj.cmt.name}" />
+
+	<path id="prj.lib.cp">
+		<fileset dir="${prj.lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\jna-4.0.0.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\commons-logging-1.1.3.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\fastjson-1.2.3.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\commons-io-2.4.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\commons-lang-2.6.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\rxtxcomm-2.2.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\swingx-all-1.6.5-1.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\rsyntaxtextarea-2.5.0.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\commons-codec-1.8.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\dom4j-1.6.1.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\xml-apis-1.0.b2.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\log4j-1.2.17.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\miglayout-3.7.4.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\velocity-1.7.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib\commons-collections-3.2.1.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\FoxhisItfHandler.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\IKExpression.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\balloontip.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\DataWindow.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\jsqlparser.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\FoxhisCommons.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\SwingComponents.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\ItfHandlerUtils.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\lib2\FoxhisServer.jar" />
+		<pathelement location="C:\Users\tq/foxxms//v340.xms.foxhis.com\pub\xSocket-2.8.15.jar" />
+	</path>
+
+
+	<target name="clean">
+		<delete dir="${prj.bin.dir}" failonerror="false" />
+		<delete dir="${prj.dest.dir}" failonerror="false" />
+	</target>
+
+	<target name="prepare" depends="clean">
+
+		<mkdir dir="${prj.bin.dir}" />
+		<mkdir dir="${prj.dest.dir}" />
+	</target>
+
+	<target name="compile" depends="prepare">
+		<javac encoding="utf-8" srcdir="${prj.src.dir}" destdir="${prj.bin.dir}">
+			<compilerarg value="-Xlint:unchecked" />
+			<compilerarg value="-Xlint:deprecation" />
+			<classpath refid="prj.lib.cp" />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<copy todir="${prj.bin.dir}">
+			<fileset dir="${prj.src.dir}">
+				<include name="**/*.*" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<jar jarfile="${prj.dest.dir}\${prj.name}.jar">
+			<fileset dir="${prj.bin.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<!--
+			<metainf dir="${prj.src.dir}/META-INF">
+				<include name="**" />
+			</metainf>
+			-->
+			<manifest>
+				<attribute name="Specification-Title" value="${prj.name}" />
+				<attribute name="Specification-Version" value="2.0.6-SNAPSHOT" />
+				<attribute name="Implementation-Title" value="${prj.name}" />
+				<attribute name="Implementation-Version" value="2.0.6-SNAPSHOT" />
+				<attribute name="Implementation-Vendor-Id" value="com.foxhis.xms.itf" />
+				<attribute name="Built-At" value="${fox.buildnow}" />
+			</manifest>
+		</jar>
+	</target>
+	<target name="deploy" depends="jar">
+		<copy todir="${prj.dest.dir}" preservelastmodified="true">
+			<fileset dir="${prj.lib.dir}">
+				<include name="*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="commit-proj">
+		<delete dir="${prj.cmt.dir}" failonerror="false" />
+		<mkdir dir="${prj.cmt.dir}" />
+		<mkdir dir="${prj.cmt.dir}/debug/${prj.name}" />
+		<mkdir dir="${prj.cmt.dir}/commit/${prj.name}" />
+		<copy todir="${prj.cmt.dir}/debug/${prj.name}" preservelastmodified="true">
+			<fileset dir="${prj.dir}">
+				<include name="src/**" />
+				<include name="doc/**" />
+				<include name="lib/**" />
+				<include name=".classpath" />
+				<include name=".project" />
+				<include name="ProjAntToMvn.class" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<java classname="ProjAntToMvn" classpath="${prj.dir}">
+			<arg value="-who" />
+			<arg value="itf" />
+			<arg value="-prj" />
+			<arg value="${prj.name}" />
+			<arg value="-dir" />
+			<arg value="${prj.dir}" />
+			<arg value="-out" />
+			<arg value="${prj.cmt.dir}/commit" />
+		</java>
+		<tar destfile="${prj.dest.dir}/${prj.cmt.name}.tar" basedir="${prj.cmt.dir}" />
+		<gzip destfile="${prj.dest.dir}/${prj.cmt.name}.tar.gz" src="${prj.dest.dir}/${prj.cmt.name}.tar" />
+		<delete file="${prj.dest.dir}/${prj.cmt.name}.tar" />
+		<delete dir="${prj.cmt.dir}" />
+
+	</target>
+
+</project>

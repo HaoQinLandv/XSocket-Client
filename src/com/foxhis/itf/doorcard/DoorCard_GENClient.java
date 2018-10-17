@@ -34,7 +34,7 @@ import com.foxhis.pms.biz.doorcardlink.DoorcardLinkBiz;
  * <br>
  * Copyright: Copyright (C) 2017 All Rights Reserved.
  * <br>
- * Company: 杭州西软
+ * Company: 杭州XXX
  * <br>
  * @author tq8
  * @createTime: 2018-04-26 14:16:32  

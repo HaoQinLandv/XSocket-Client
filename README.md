@@ -1,6 +1,6 @@
 # XSocket客户端。
 
-## 绑定服务端IP与端口
+* 绑定服务端IP与端口
 ```java
     IBlockingConnection nbc = new BlockingConnection(this.serverip, this.serverport);
 ```

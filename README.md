@@ -1,16 +1,16 @@
-XSocket客户端。
+# XSocket客户端。
 
-绑定服务端IP与端口
-
+## 绑定服务端IP与端口
+```java
     IBlockingConnection nbc = new BlockingConnection(this.serverip, this.serverport);
-
-设置超时
-
+```
+* 设置超时
+```java
     nbc.setConnectionTimeoutMillis(this.conntimeout*1000);
+```
 
-
-代码实例如下：
-
+* 代码实例如下：
+```java
      /**
 	 * 获取BlockingConnection，并设置超时conntimeout*1000
 	 * @return
@@ -26,31 +26,31 @@ XSocket客户端。
 
 		return nbc;
 	  }
+```
+* 发送数据到服务端，采用json+ascii格式
 
-发送数据到服务端，采用json+ascii格式
-
-1.申请json
-
+   * 申请json
+```java
        JSONObject js=new JSONObject();
 		js.put("method", "readcard");
 		js.put("data", input);
-
-2.获取连接
-
+```
+   * 获取连接
+```java
        nbc=getBc();
-       
-3.发送数据
-
+```     
+   * 发送数据
+```java
        nbc.write(js.toJSONString()+ETX);
-
-4.接收服务端数据
-   
+```
+   * 接收服务端数据
+ ```java  
        String res = nbc.readStringByDelimiter(ETX);
-        
+```        
 
 
 发送数据到服务端的代码示例：
-
+```java
     public Map<String, Object> readCardInternal(Map<String, Object> input) throws Exception {
 		Map<String, Object> retmap = new HashMap<String, Object>();
 		JSONObject js=new JSONObject();
@@ -80,4 +80,4 @@ XSocket客户端。
 		}
 		return retmap;
 	}
-
+```
